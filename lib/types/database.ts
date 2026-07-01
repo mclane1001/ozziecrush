@@ -55,6 +55,44 @@ export interface Database {
         Insert: Omit<Database['public']['Tables']['subscriptions']['Row'], 'id' | 'created_at'>
         Update: Partial<Omit<Database['public']['Tables']['subscriptions']['Row'], 'id' | 'user_id' | 'created_at'>>
       }
+      verifications: {
+        Row: {
+          id: string
+          user_id: string
+          provider: string
+          status: 'pending' | 'approved' | 'rejected'
+          document_type: string | null
+          provider_reference: string | null
+          created_at: string
+          reviewed_at: string | null
+        }
+        Insert: Omit<Database['public']['Tables']['verifications']['Row'], 'id' | 'created_at'>
+        Update: Pick<Database['public']['Tables']['verifications']['Row'], 'status' | 'reviewed_at'>
+      }
+      payments: {
+        Row: {
+          id: string
+          user_id: string
+          stripe_payment_intent_id: string | null
+          amount_cents: number
+          currency: string
+          status: string
+          created_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['payments']['Row'], 'id' | 'created_at'>
+        Update: Pick<Database['public']['Tables']['payments']['Row'], 'status'>
+      }
+      consent_events: {
+        Row: {
+          id: string
+          user_id: string
+          consent_type: 'privacy_policy' | 'terms' | 'marketing_opt_in'
+          version: string
+          accepted_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['consent_events']['Row'], 'id' | 'accepted_at'>
+        Update: never
+      }
     }
     Functions: {
       get_discovery_feed: {

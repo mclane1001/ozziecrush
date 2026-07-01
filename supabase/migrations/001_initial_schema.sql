@@ -115,6 +115,7 @@ create table public.blocks (
   unique (blocker_id, blocked_id)
 );
 create index blocks_blocker_idx on public.blocks (blocker_id);
+create index blocks_blocked_idx on public.blocks (blocked_id);
 
 -- ============================
 -- SUBSCRIPTIONS
@@ -248,7 +249,7 @@ as $$
   where
     p.id != p_user_id
     and p.is_active = true
-    and (current_date - p.dob) / 365 >= 18
+    and date_part('year', age(p.dob)) >= 18
     -- exclude already-swiped
     and p.id not in (
       select swiped_id from public.swipes where swiper_id = p_user_id
