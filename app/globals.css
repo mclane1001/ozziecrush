@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --oz-coral: #E8472A;
+  --oz-cream: #FFF8F0;
+  --oz-sand:  #F5E6D3;
+  --oz-dark:  #1A0F00;
+  --oz-muted: #7A5C4A;
+}
+
+body {
+  background-color: var(--oz-cream);
+  color: var(--oz-dark);
+  font-family: 'DM Sans', sans-serif;
+}
