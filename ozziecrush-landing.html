@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OzzieCrush — Find Your Someone in Australia</title>
+<meta name="description" content="The dating app made for Aussies. Verified profiles, genuine connections, built for Australia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral:#00693E;
+    --coral-dark:#004f2d;
+    --coral-light:rgba(0,105,62,.12);
+    --cream:#F5FBF2;
+    --sand:#E8F5EC;
+    --dark:#0A1F12;
+    --muted:#3D6B50;
+    --line:rgba(0,105,62,.18);
+    --gold:#FFCD00;
+    --gold-dark:#e6b800;
+    --card-bg:rgba(255,255,255,0.95);
+    --r-md:12px;
+    --r-lg:20px;
+    --r-xl:28px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{position:sticky;top:0;z-index:100;background:rgba(245,251,242,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--coral);text-decoration:none;display:flex;align-items:center;gap:8px}
+  .nav-logo span{font-size:20px}
+  .nav-cta{background:var(--gold);color:var(--dark);border:none;padding:10px 22px;border-radius:40px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:background .15s}
+  .nav-cta:hover{background:var(--gold-dark)}
+
+  /* ── HERO ── */
+  .hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:60px 24px 40px;gap:48px}
+  @media(min-width:900px){.hero{flex-direction:row;text-align:left;padding:80px 60px;gap:64px;justify-content:center}}
+  .hero-copy{max-width:500px}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--coral-light);color:var(--coral);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:40px;margin-bottom:18px}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,58px);font-weight:900;line-height:1.1;margin-bottom:20px;color:var(--dark)}
+  h1 em{font-style:normal;color:var(--coral)}
+  .hero-sub{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:420px}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  @media(min-width:900px){.hero-btns{justify-content:flex-start}}
+  .btn-primary{background:var(--gold);color:var(--dark);border:none;padding:14px 28px;border-radius:40px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:background .15s,transform .1s;display:inline-block}
+  .btn-primary:hover{background:var(--gold-dark);transform:translateY(-1px)}
+  .btn-secondary{background:#fff;color:var(--dark);border:2px solid var(--line);padding:13px 24px;border-radius:40px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:border-color .15s;display:inline-block}
+  .btn-secondary:hover{border-color:var(--coral)}
+  .hero-trust{display:flex;align-items:center;gap:8px;margin-top:20px;font-size:12px;color:var(--muted)}
+  .trust-dot{width:6px;height:6px;border-radius:50%;background:var(--coral);display:inline-block}
+
+  /* ── SWIPE DEMO ── */
+  .swipe-demo{position:relative;width:280px;flex-shrink:0}
+  .demo-phone{background:#fff;border-radius:32px;padding:16px;box-shadow:0 24px 60px rgba(26,15,0,.15),0 0 0 1px var(--line);width:100%}
+  .demo-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 4px}
+  .demo-topbar-title{font-size:13px;font-weight:700;color:var(--dark)}
+  .demo-topbar-icons{display:flex;gap:8px;font-size:14px}
+  .demo-card{border-radius:var(--r-xl);overflow:hidden;position:relative;aspect-ratio:3/4;background:var(--sand);cursor:pointer;transition:transform .35s ease,opacity .35s ease;user-select:none}
+  .demo-card-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:80px}
+  .demo-card-info{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(to top,rgba(26,15,0,.85),transparent)}
+  .demo-card-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff}
+  .demo-card-loc{font-size:12px;color:rgba(255,248,240,.8);margin-top:2px}
+  .demo-card-bio{font-size:11px;color:rgba(255,248,240,.7);margin-top:4px}
+  .demo-badge{position:absolute;top:12px;right:12px;background:var(--coral);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+  .demo-actions{display:flex;justify-content:center;gap:16px;margin-top:14px}
+  .demo-btn{width:52px;height:52px;border-radius:50%;border:none;font-size:20px;cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;align-items:center;justify-content:center}
+  .demo-btn:hover{transform:scale(1.1)}
+  .demo-btn-pass{background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .demo-btn-like{background:var(--gold);box-shadow:0 4px 12px rgba(255,205,0,.4);color:var(--dark)}
+  .demo-btn-super{background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .demo-hint{text-align:center;font-size:11px;color:var(--muted);margin-top:8px}
+
+  /* ── STATS BAR ── */
+  .stats-bar{background:var(--coral);padding:20px 24px;display:flex;justify-content:center;gap:0;flex-wrap:wrap}
+  .stat-item{text-align:center;padding:8px 28px;color:#fff;border-right:1px solid rgba(255,255,255,.2)}
+  .stat-item:last-child{border-right:none}
+  .stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:900}
+  .stat-label{font-size:11px;opacity:.85;margin-top:2px;text-transform:uppercase;letter-spacing:.05em}
+
+  /* ── SECTIONS ── */
+  section{padding:72px 24px}
+  @media(min-width:900px){section{padding:88px 60px}}
+  .sec-inner{max-width:1080px;margin:0 auto}
+  .sec-eye{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+  h2.sec-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:900;margin-bottom:14px;color:var(--dark)}
+  .sec-sub{font-size:15px;color:var(--muted);max-width:480px;line-height:1.7;margin-bottom:48px}
+
+  /* ── FEATURES ── */
+  .features-bg{background:var(--sand)}
+  .feat-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:600px){.feat-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:900px){.feat-grid{grid-template-columns:1fr 1fr 1fr}}
+  .feat-card{background:#fff;border-radius:var(--r-lg);padding:24px;border:1px solid var(--line);transition:transform .15s,box-shadow .15s}
+  .feat-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(232,71,42,.1)}
+  .feat-icon{font-size:32px;margin-bottom:14px}
+  .feat-title{font-size:15px;font-weight:800;margin-bottom:6px;color:var(--dark)}
+  .feat-body{font-size:13px;color:var(--muted);line-height:1.6}
+
+  /* ── HOW IT WORKS ── */
+  .steps-grid{display:grid;grid-template-columns:1fr;gap:32px}
+  @media(min-width:900px){.steps-grid{grid-template-columns:1fr 1fr 1fr}}
+  .step-item{text-align:center;padding:0 16px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--gold);color:var(--dark);font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+  .step-title{font-size:16px;font-weight:800;margin-bottom:8px;color:var(--dark)}
+  .step-body{font-size:13px;color:var(--muted);line-height:1.6}
+  .step-connector{display:none}
+  @media(min-width:900px){.steps-wrapper{position:relative}.step-connector{display:block;position:absolute;top:24px;left:33%;width:34%;height:2px;background:var(--line)}}
+
+  /* ── PROFILES ── */
+  .profiles-bg{background:var(--sand)}
+  .profiles-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .profiles-scroll::-webkit-scrollbar{display:none}
+  .pcard{flex-shrink:0;width:200px;background:#fff;border-radius:var(--r-xl);overflow:hidden;box-shadow:0 8px 24px rgba(26,15,0,.08);cursor:pointer;transition:transform .2s}
+  .pcard:hover{transform:translateY(-4px)}
+  .pcard-photo{height:240px;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;overflow:hidden}
+  .pcard-photo.has-photo .pcard-photo-emoji{display:none}
+  .pcard-photo input[type=file]{display:none}
+  .pcard-verified{position:absolute;top:10px;right:10px;background:var(--coral);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;z-index:2}
+  .pcard-photo-edit{position:absolute;bottom:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(10,31,18,.55);color:#fff;border:none;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
+  .pcard-photo .photo-menu{z-index:3}
+  .pcard-photo.menu-open .photo-menu{display:flex}
+  .pcard-info{padding:14px}
+  .pcard-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--dark)}
+  .pcard-loc{font-size:11px;color:var(--muted);margin-top:2px}
+  .pcard-bio{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
+  .pcard-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+  .pcard-tag{background:var(--coral-light);color:var(--coral);font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px}
+
+  /* ── PHOTO UPLOAD ── */
+  .upload-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:480px;margin:0 auto 24px}
+  .upload-slot{aspect-ratio:1;border-radius:var(--r-lg);border:2px dashed var(--line);background:var(--sand);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s,background .2s}
+  .upload-slot:hover{border-color:var(--coral);background:rgba(0,105,62,.06)}
+  .upload-slot.has-photo{border-style:solid;border-color:var(--coral)}
+  .upload-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .upload-slot-icon{font-size:28px;margin-bottom:4px;pointer-events:none}
+  .upload-slot-label{font-size:11px;font-weight:700;color:var(--muted);pointer-events:none}
+  .upload-slot-num{position:absolute;top:6px;left:8px;font-size:10px;font-weight:800;color:var(--muted);pointer-events:none}
+  .upload-slot.has-photo .upload-slot-num{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+  .upload-slot-remove{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:800;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;border:none;line-height:1}
+  .upload-slot.has-photo .upload-slot-remove{display:flex}
+  .upload-slot input[type=file]{display:none}
+  .upload-main-tip{text-align:center;font-size:12px;color:var(--muted);margin-bottom:8px}
+  .upload-count{text-align:center;font-size:13px;font-weight:700;color:var(--coral);margin-bottom:20px}
+  /* photo source menu */
+  .photo-menu{position:absolute;inset:0;background:rgba(10,31,18,.72);border-radius:var(--r-lg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:3}
+  .upload-slot.menu-open .photo-menu{display:flex}
+  .photo-menu-btn{width:80%;padding:9px 0;border-radius:20px;font-size:12px;font-weight:800;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
+  .photo-menu-cam{background:var(--gold);color:var(--dark)}
+  .photo-menu-lib{background:#fff;color:var(--dark)}
+  .photo-menu-cancel{background:transparent;color:rgba(255,255,255,.7);font-size:11px;margin-top:2px}
+  /* camera modal */
+  #cam-modal{position:fixed;inset:0;z-index:1000;background:rgba(10,31,18,.92);display:none;align-items:center;justify-content:center;padding:20px}
+  #cam-modal.open{display:flex}
+  .cam-box{background:#000;border-radius:20px;overflow:hidden;width:100%;max-width:420px;position:relative}
+  #cam-video{width:100%;display:block;border-radius:20px 20px 0 0}
+  .cam-controls{background:#111;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .cam-capture{width:60px;height:60px;border-radius:50%;background:var(--gold);border:4px solid #fff;cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;margin:0 auto;transition:transform .1s}
+  .cam-capture:hover{transform:scale(1.08)}
+  .cam-flip{background:rgba(255,255,255,.12);border:none;color:#fff;font-size:20px;padding:10px;border-radius:50%;cursor:pointer;width:44px;height:44px}
+  .cam-close{background:rgba(255,255,255,.12);border:none;color:#fff;font-size:14px;font-weight:700;padding:10px 16px;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif}
+  #cam-canvas{display:none}
+
+  /* ── FILTERS ── */
+  .filter-card{background:#fff;border-radius:var(--r-xl);padding:28px;box-shadow:0 8px 32px rgba(0,105,62,.1);max-width:480px;margin:0 auto}
+  .filter-row{margin-bottom:28px}
+  .filter-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .filter-label-text{font-size:14px;font-weight:800;color:var(--dark)}
+  .filter-label-val{font-size:13px;font-weight:700;color:var(--coral);background:var(--sand);padding:4px 12px;border-radius:20px}
+  .range-wrap{position:relative;height:36px;display:flex;align-items:center}
+  .range-track{position:absolute;left:0;right:0;height:4px;background:var(--sand);border-radius:2px}
+  .range-fill{position:absolute;height:4px;background:var(--coral);border-radius:2px;pointer-events:none}
+  .range-input{position:absolute;width:100%;-webkit-appearance:none;appearance:none;background:transparent;pointer-events:none;height:4px}
+  .range-input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--coral);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,105,62,.3);pointer-events:all;cursor:pointer}
+  .range-input::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--coral);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,105,62,.3);pointer-events:all;cursor:pointer;border:3px solid #fff}
+  .range-input.upper{z-index:1}
+  .filter-result{background:var(--sand);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+  .filter-result-text{font-size:13px;color:var(--muted)}
+  .filter-result-count{font-size:20px;font-weight:900;font-family:'Playfair Display',serif;color:var(--coral)}
+  .filter-apply{width:100%;margin-top:20px;padding:14px;border-radius:40px;background:var(--gold);color:var(--dark);font-size:15px;font-weight:800;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
+  .filter-apply:hover{background:var(--gold-dark)}
+  .state-chip{padding:8px 14px;border-radius:20px;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;border:2px solid var(--line);background:#fff;color:var(--muted);transition:all .15s}
+  .state-chip.active{background:var(--coral);color:#fff;border-color:var(--coral)}
+
+  /* ── SAFETY ── */
+  .safety-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:600px){.safety-grid{grid-template-columns:1fr 1fr}}
+  .safety-card{background:#fff;border-radius:var(--r-lg);padding:20px;border:1px solid var(--line);display:flex;gap:14px;align-items:flex-start}
+  .safety-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .safety-title{font-size:14px;font-weight:800;color:var(--dark);margin-bottom:4px}
+  .safety-body{font-size:12px;color:var(--muted);line-height:1.6}
+
+  /* ── PRICING ── */
+  .pricing-bg{background:var(--sand)}
+  .pricing-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:800px;margin:0 auto}
+  @media(min-width:700px){.pricing-grid{grid-template-columns:1fr 1fr 1fr}}
+  .pricing-card{background:#fff;border-radius:var(--r-xl);padding:28px 24px;border:2px solid var(--line);text-align:center;position:relative;transition:transform .15s,box-shadow .15s}
+  .pricing-card.featured{border-color:var(--gold);transform:scale(1.03);box-shadow:0 16px 40px rgba(255,205,0,.25)}
+  .pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark);font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap}
+  .pricing-tier{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .pricing-price{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--dark);line-height:1}
+  .pricing-period{font-size:12px;color:var(--muted);margin-top:4px;margin-bottom:20px}
+  .pricing-features{list-style:none;text-align:left;margin-bottom:24px;display:flex;flex-direction:column;gap:8px}
+  .pricing-features li{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+  .pricing-features li::before{content:'✓';color:var(--coral);font-weight:800;flex-shrink:0}
+  .pricing-btn{width:100%;padding:12px;border-radius:40px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s,transform .1s;border:2px solid var(--coral)}
+  .pricing-btn-outline{background:#fff;color:var(--coral)}
+  .pricing-btn-fill{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+  .pricing-btn:hover{transform:translateY(-1px)}
+
+  /* ── SIGNUP ── */
+  .signup-bg{background:var(--dark)}
+  .signup-inner{text-align:center;max-width:560px;margin:0 auto}
+  .signup-eye{color:rgba(255,248,240,.8);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+  .signup-title{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,42px);font-weight:900;color:#fff;margin-bottom:12px}
+  .signup-sub{font-size:15px;color:rgba(255,248,240,.85);margin-bottom:32px;line-height:1.6}
+  .signup-form{display:flex;flex-direction:column;gap:12px;max-width:420px;margin:0 auto}
+  @media(min-width:600px){.signup-form{flex-direction:row}}
+  .signup-input{flex:1;padding:14px 20px;border-radius:40px;border:none;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;color:var(--dark)}
+  .signup-input::placeholder{color:var(--muted)}
+  .signup-btn{padding:14px 28px;border-radius:40px;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:background .15s}
+  .signup-btn:hover{background:var(--gold-dark)}
+  .signup-success{text-align:center;padding:20px}
+  .signup-success-icon{font-size:40px;margin-bottom:8px}
+  .signup-success-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#fff}
+  .signup-success-sub{font-size:14px;color:rgba(255,248,240,.85);margin-top:6px}
+
+  /* ── FOOTER ── */
+  footer{background:var(--dark);padding:48px 24px 32px;color:var(--sand)}
+  .footer-inner{max-width:1080px;margin:0 auto}
+  .footer-top{display:flex;flex-direction:column;gap:24px;margin-bottom:32px}
+  @media(min-width:700px){.footer-top{flex-direction:row;align-items:flex-start;justify-content:space-between}}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--coral);margin-bottom:8px}
+  .footer-tagline{font-size:13px;color:rgba(245,230,211,.6);max-width:220px;line-height:1.6}
+  .footer-links{display:flex;gap:20px;flex-wrap:wrap}
+  .footer-links a{font-size:13px;color:rgba(245,230,211,.7);text-decoration:none;transition:color .15s}
+  .footer-links a:hover{color:var(--coral)}
+  .footer-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+  .footer-badge{font-size:11px;background:rgba(255,255,255,.07);color:rgba(245,230,211,.8);padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.1)}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;font-size:11px;color:rgba(245,230,211,.4);display:flex;flex-direction:column;gap:6px}
+  @media(min-width:700px){.footer-bottom{flex-direction:row;justify-content:space-between}}
+
+  /* ── OVERLAY / SHEET ── */
+  #bs-overlay{position:fixed;inset:0;background:rgba(26,15,0,.5);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+  #bs-overlay.open{opacity:1;pointer-events:all}
+  .bottom-sheet{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:24px 24px 0 0;z-index:201;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,0,.67,0);max-width:520px;margin:0 auto;max-height:88vh;overflow-y:auto}
+  .bottom-sheet.open{transform:translateY(0)}
+  .bs-handle{width:36px;height:4px;background:rgba(26,15,0,.15);border-radius:2px;margin:12px auto 4px}
+
+  /* ── TOAST ── */
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;padding:12px 24px;border-radius:40px;font-size:13px;font-weight:600;z-index:999;transition:transform .3s;white-space:nowrap}
+  #toast.show{transform:translateX(-50%) translateY(0)}
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .fade-up{opacity:0;animation:fadeUp .5s ease forwards}
+  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
+
+  /* ── AGE GATE ── */
+  #age-gate{position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;align-items:center;justify-content:center;padding:24px;transition:opacity .5s ease}
+  #age-gate.hiding{opacity:0;pointer-events:none}
+  .ag-card{background:#fff;border-radius:28px;max-width:420px;width:100%;padding:40px 32px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5)}
+  .ag-logo{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--coral);margin-bottom:6px}
+  .ag-badge{display:inline-block;background:var(--gold);color:var(--dark);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:22px}
+  .ag-icon{font-size:48px;margin-bottom:14px}
+  .ag-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--dark);margin-bottom:10px;line-height:1.2}
+  .ag-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:28px}
+  .ag-warning{background:rgba(0,105,62,.08);border:1px solid rgba(0,105,62,.2);border-radius:12px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:var(--coral);line-height:1.6;display:flex;gap:10px;align-items:flex-start;text-align:left}
+  .ag-btns{display:flex;flex-direction:column;gap:10px}
+  .ag-btn-yes{background:var(--gold);color:var(--dark);border:none;padding:15px;border-radius:40px;font-size:15px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s,transform .1s;width:100%}
+  .ag-btn-yes:hover{background:var(--gold-dark);transform:translateY(-1px)}
+  .ag-btn-no{background:#fff;color:var(--muted);border:2px solid var(--line);padding:13px;border-radius:40px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color .15s;width:100%}
+  .ag-btn-no:hover{border-color:var(--coral)}
+  .ag-legal{font-size:10px;color:var(--muted);margin-top:18px;line-height:1.6;opacity:.8}
+  .ag-toggle{padding:9px 14px;border-radius:20px;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;border:2px solid var(--line);background:#fff;color:var(--muted);transition:all .15s;white-space:nowrap}
+  .ag-toggle.active{background:var(--coral);color:#fff;border-color:var(--coral)}
+  .ag-toggle:hover:not(.active){border-color:var(--coral);color:var(--coral)}
+  .ag-otp-box{width:44px;height:52px;border-radius:12px;border:2px solid var(--line);font-size:22px;font-weight:800;text-align:center;font-family:'DM Sans',sans-serif;color:var(--dark);outline:none;transition:border-color .15s}
+  .ag-otp-box:focus{border-color:var(--coral)}
+  .ag-otp-box.filled{border-color:var(--coral);background:var(--sand)}
+  .ag-denied{display:none;padding:16px 0}
+  .ag-denied-icon{font-size:40px;margin-bottom:10px}
+  .ag-denied-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--dark);margin-bottom:8px}
+  .ag-denied-sub{font-size:13px;color:var(--muted);line-height:1.6}
+</style>
+</head>
+<body>
+
+<!-- AGE GATE -->
+<div id="age-gate">
+  <div class="ag-card">
+    <div class="ag-logo">OzzieCrush 🦘</div>
+    <div class="ag-badge">18+ Adult Dating Platform</div>
+    <!-- STEP 1: Age confirm -->
+    <div id="ag-step1">
+      <div class="ag-icon">🔞</div>
+      <h2 class="ag-title">You are entering an adult website</h2>
+      <p class="ag-sub">OzzieCrush is an adult dating platform intended for people aged <strong>18 years and over</strong>. This site contains mature content and is not suitable for minors.</p>
+      <div class="ag-warning">
+        <span style="font-size:16px;flex-shrink:0">⚠️</span>
+        <span>By entering, you confirm you are at least <strong>18 years of age</strong> and legally permitted to access adult content in your jurisdiction.</span>
+      </div>
+      <div class="ag-btns">
+        <button class="ag-btn-yes" onclick="agStep2()">Yes, I am 18 or older — Continue</button>
+        <button class="ag-btn-no" onclick="agDeny()">No, I am under 18 — Exit</button>
+      </div>
+      <p class="ag-legal">By continuing you agree to our <a href="#" onclick="return false" style="color:var(--coral)">Terms of Service</a> and <a href="#" onclick="return false" style="color:var(--coral)">Privacy Policy</a>. Operated under Australian Privacy Act 1988 and Online Safety Act 2021.</p>
+    </div>
+
+    <!-- STEP 2: Profile basics + mobile -->
+    <div id="ag-step2" style="display:none">
+      <div class="ag-icon">👤</div>
+      <h2 class="ag-title">Tell us about you</h2>
+      <p class="ag-sub" style="margin-bottom:20px">Quick details to find your best matches.</p>
+
+      <!-- I am -->
+      <div style="margin-bottom:16px;text-align:left">
+        <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">I am a</label>
+        <div style="display:flex;gap:8px">
+          <button class="ag-toggle active" id="iam-man" onclick="agToggleIam('man')">👨 Man</button>
+          <button class="ag-toggle" id="iam-woman" onclick="agToggleIam('woman')">👩 Woman</button>
+          <button class="ag-toggle" id="iam-other" onclick="agToggleIam('other')">🧑 Other</button>
+        </div>
+      </div>
+
+      <!-- Looking for -->
+      <div style="margin-bottom:16px;text-align:left">
+        <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Looking for</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="ag-toggle" id="seek-man" onclick="agToggleSeek('man')">👨 Men</button>
+          <button class="ag-toggle active" id="seek-woman" onclick="agToggleSeek('woman')">👩 Women</button>
+          <button class="ag-toggle" id="seek-everyone" onclick="agToggleSeek('everyone')">💞 Everyone</button>
+        </div>
+      </div>
+
+      <!-- Age group -->
+      <div style="margin-bottom:16px;text-align:left">
+        <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">My age group</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="ag-toggle" id="age-18" onclick="agToggleAge('18-24')">18 – 24</button>
+          <button class="ag-toggle active" id="age-25" onclick="agToggleAge('25-34')">25 – 34</button>
+          <button class="ag-toggle" id="age-35" onclick="agToggleAge('35-44')">35 – 44</button>
+          <button class="ag-toggle" id="age-45" onclick="agToggleAge('45+')">45+</button>
+        </div>
+      </div>
+
+      <!-- Mobile number -->
+      <div style="margin-bottom:16px;text-align:left">
+        <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Mobile number</label>
+        <div style="display:flex;gap:8px">
+          <div style="background:var(--sand);border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:700;color:var(--dark);flex-shrink:0;display:flex;align-items:center;gap:6px">🇦🇺 +61</div>
+          <input id="ag-mobile" type="tel" placeholder="4XX XXX XXX" maxlength="12"
+            style="flex:1;padding:12px 16px;border-radius:12px;border:2px solid var(--line);font-size:15px;font-family:'DM Sans',sans-serif;color:var(--dark);outline:none;width:100%"
+            oninput="agMobileInput(this)" onfocus="this.style.borderColor='var(--coral)'" onblur="this.style.borderColor='var(--line)'">
+        </div>
+        <p id="ag-mobile-err" style="font-size:11px;color:#c0392b;margin-top:6px;display:none">Please enter at least 4 digits</p>
+      </div>
+
+      <button class="ag-btn-yes" onclick="agSendOTP()">Send verification code →</button>
+      <button class="ag-btn-no" style="margin-top:8px" onclick="agGoStep1()">← Back</button>
+    </div>
+
+    <!-- STEP 3: OTP -->
+    <div id="ag-step3" style="display:none">
+      <div class="ag-icon">💬</div>
+      <h2 class="ag-title">Enter your code</h2>
+      <p class="ag-sub" id="ag-otp-sub">We sent a 4-digit code to your mobile. Enter it below to verify.</p>
+      <div id="ag-demo-code" style="background:var(--sand);border:2px dashed var(--coral);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:center;display:none">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">🧪 Demo — your code is</div>
+        <div id="ag-demo-code-num" style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--coral);letter-spacing:6px"></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:20px" id="ag-otp-boxes">
+        <input class="ag-otp-box" type="tel" maxlength="1" oninput="agOtpInput(this,0)" onkeydown="agOtpKey(event,0)">
+        <input class="ag-otp-box" type="tel" maxlength="1" oninput="agOtpInput(this,1)" onkeydown="agOtpKey(event,1)">
+        <input class="ag-otp-box" type="tel" maxlength="1" oninput="agOtpInput(this,2)" onkeydown="agOtpKey(event,2)">
+        <input class="ag-otp-box" type="tel" maxlength="1" oninput="agOtpInput(this,3)" onkeydown="agOtpKey(event,3)">
+      </div>
+      <p id="ag-otp-err" style="font-size:11px;color:#c0392b;margin-bottom:12px;display:none">Incorrect code. Please try again.</p>
+      <button class="ag-btn-yes" onclick="agVerifyOTP()">Verify &amp; Enter →</button>
+      <div style="margin-top:14px;font-size:12px;color:var(--muted)">Didn't get the code? <button onclick="agResend()" style="background:none;border:none;color:var(--coral);font-weight:700;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif" id="ag-resend-btn">Resend</button> <span id="ag-resend-timer" style="display:none;color:var(--muted)"></span></div>
+      <button class="ag-btn-no" style="margin-top:8px" onclick="agGoStep2()">← Change number</button>
+    </div>
+
+    <!-- DENIED -->
+    <div class="ag-denied" id="ag-denied">
+      <div class="ag-denied-icon">🚫</div>
+      <div class="ag-denied-title">Access Denied</div>
+      <p class="ag-denied-sub">You must be 18 or older to access OzzieCrush. Please close this tab.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">OzzieCrush <span>🦘</span></a>
+  <a class="nav-cta" href="#early-access">Get early access</a>
+</nav>
+
+<!-- HERO -->
+<section style="padding:60px 24px 40px;background:var(--cream)">
+  <div class="hero sec-inner">
+    <div class="hero-copy fade-up">
+      <div class="hero-eyebrow">🇦🇺 Made for Aussies</div>
+      <h1>Find your<br>someone<br><em>across Australia</em></h1>
+      <p class="hero-sub">Real profiles, genuine connections. OzzieCrush puts safety and authenticity first — built for Australians, by Australians.</p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#early-access">Join the waitlist →</a>
+        <a class="btn-secondary" href="#how-it-works">See how it works</a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-dot"></span>
+        <span>Privacy Act 1988 compliant</span>
+        <span class="trust-dot" style="margin-left:8px"></span>
+        <span>Data stored in Sydney</span>
+        <span class="trust-dot" style="margin-left:8px"></span>
+        <span>18+ only</span>
+      </div>
+    </div>
+    <div class="swipe-demo fade-up delay-2">
+      <div class="demo-phone">
+        <div class="demo-topbar">
+          <span class="demo-topbar-title">Discover</span>
+          <span class="demo-topbar-icons">🔔 ⚙️</span>
+        </div>
+        <div class="demo-card" id="demo-card">
+          <div class="demo-card-emoji" id="demo-emoji">👩‍🦰</div>
+          <div class="demo-badge" id="demo-badge">✓ Verified</div>
+          <div class="demo-card-info">
+            <div class="demo-card-name" id="demo-name">Mia, 26</div>
+            <div class="demo-card-loc" id="demo-loc">📍 Sydney, NSW</div>
+            <div class="demo-card-bio" id="demo-bio">Beach runs & flat whites ☕</div>
+          </div>
+        </div>
+        <div class="demo-actions">
+          <button class="demo-btn demo-btn-pass" onclick="demoSwipe('pass')" title="Pass">💔</button>
+          <button class="demo-btn demo-btn-super" onclick="demoSwipe('super')" title="Super Like">⭐</button>
+          <button class="demo-btn demo-btn-like" onclick="demoSwipe('like')" title="Like">❤️</button>
+        </div>
+        <div class="demo-hint">Tap ❤️ or ✕ to try it out</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">50K+</div><div class="stat-label">Aussies waiting</div></div>
+  <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">States &amp; territories</div></div>
+  <div class="stat-item"><div class="stat-num">4.8★</div><div class="stat-label">Beta rating</div></div>
+  <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Fake profiles</div></div>
+</div>
+
+<!-- FEATURES -->
+<section class="features-bg">
+  <div class="sec-inner">
+    <div class="sec-eye">Why OzzieCrush</div>
+    <h2 class="sec-title">Built different.<br>Built for here.</h2>
+    <p class="sec-sub">Every feature is designed around Aussie dating culture — no US-centric assumptions, no imported playbooks.</p>
+    <div class="feat-grid">
+      <div class="feat-card fade-up">
+        <div class="feat-icon">✅</div>
+        <div class="feat-title">Verified profiles only</div>
+        <div class="feat-body">Optional ID check (driver's licence or passport) earns you a blue tick. Filter your feed to verified matches only.</div>
+      </div>
+      <div class="feat-card fade-up delay-1">
+        <div class="feat-icon">🛡️</div>
+        <div class="feat-title">Safety first</div>
+        <div class="feat-body">Report or block in two taps. Our Safety team reviews every report within 24 hours, seven days a week.</div>
+      </div>
+      <div class="feat-card fade-up delay-2">
+        <div class="feat-icon">🔒</div>
+        <div class="feat-title">Data stays in Australia</div>
+        <div class="feat-body">Your data is stored in Sydney (AWS ap-southeast-2). Privacy Act 1988 compliant — not just GDPR-lite.</div>
+      </div>
+      <div class="feat-card fade-up">
+        <div class="feat-icon">🦘</div>
+        <div class="feat-title">Local focus</div>
+        <div class="feat-body">Distance filters by suburb, postcode, or region. Find someone in your city — or your town.</div>
+      </div>
+      <div class="feat-card fade-up delay-1">
+        <div class="feat-icon">💬</div>
+        <div class="feat-title">Icebreaker prompts</div>
+        <div class="feat-body">Suggested openers make starting a conversation easy — no more staring at a blank message box.</div>
+      </div>
+      <div class="feat-card fade-up delay-2">
+        <div class="feat-icon">🚫</div>
+        <div class="feat-title">Zero-bot guarantee</div>
+        <div class="feat-body">Phone OTP at signup + AI moderation removes bots before they reach your feed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="sec-inner">
+    <div class="sec-eye">Getting started</div>
+    <h2 class="sec-title">Three steps to your someone</h2>
+    <div class="steps-wrapper" style="position:relative">
+      <div class="steps-grid">
+        <div class="step-item fade-up">
+          <div class="step-num">1</div>
+          <div class="step-title">Create your profile</div>
+          <div class="step-body">Sign up with your Aussie mobile number. Upload photos, write a short bio, pick your location and preferences.</div>
+        </div>
+        <div class="step-item fade-up delay-1">
+          <div class="step-num">2</div>
+          <div class="step-title">Swipe &amp; match</div>
+          <div class="step-body">Like profiles you're interested in. When it's mutual — it's a match! Superlike to stand out from the crowd.</div>
+        </div>
+        <div class="step-item fade-up delay-2">
+          <div class="step-num">3</div>
+          <div class="step-title">Start a conversation</div>
+          <div class="step-body">Send a message, share a voice note, or use our icebreaker prompts to kick things off.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO UPLOAD -->
+<section style="background:#fff">
+  <div class="sec-inner" style="max-width:560px;margin:0 auto;text-align:center">
+    <div class="sec-eye">Your Profile</div>
+    <h2 class="sec-title">Add up to 6 photos</h2>
+    <p class="sec-sub" style="margin:0 auto 28px">Your first photo is your main profile photo. Tap any slot to upload — tap the × to remove.</p>
+    <div class="upload-count" id="upload-count">0 of 6 photos added</div>
+    <div class="upload-grid" id="upload-grid">
+      <div class="upload-slot" id="slot-0" onclick="openPhotoMenu(event,0)">
+        <span class="upload-slot-num">1</span>
+        <input type="file" accept="image/*" onchange="handleUpload(0,this)">
+        <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handleUpload(0,this)">
+        <span class="upload-slot-icon">📷</span>
+        <span class="upload-slot-label">Main photo</span>
+        <button class="upload-slot-remove" onclick="removePhoto(event,0)">×</button>
+        <div class="photo-menu">
+          <button class="photo-menu-btn photo-menu-cam" onclick="triggerCamera(event,0)">📷 Take photo</button>
+          <button class="photo-menu-btn photo-menu-lib" onclick="triggerLibrary(event,0)">🖼️ Choose from library</button>
+          <button class="photo-menu-btn photo-menu-cancel" onclick="closePhotoMenu(event,0)">Cancel</button>
+        </div>
+      </div>
+      <div class="upload-slot" id="slot-1" onclick="openPhotoMenu(event,1)">
+        <span class="upload-slot-num">2</span>
+        <input type="file" accept="image/*" onchange="handleUpload(1,this)">
+        <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handleUpload(1,this)">
+        <span class="upload-slot-icon">➕</span>
+        <span class="upload-slot-label">Add photo</span>
+        <button class="upload-slot-remove" onclick="removePhoto(event,1)">×</button>
+        <div class="photo-menu">
+          <button class="photo-menu-btn photo-menu-cam" onclick="triggerCamera(event,1)">📷 Take photo</button>
+          <button class="photo-menu-btn photo-menu-lib" onclick="triggerLibrary(event,1)">🖼️ Choose from library</button>
+          <button class="photo-menu-btn photo-menu-cancel" onclick="closePhotoMenu(event,1)">Cancel</button>
+        </div>
+      </div>
+      <div class="upload-slot" id="slot-2" onclick="openPhotoMenu(event,2)">
+        <span class="upload-slot-num">3</span>
+        <input type="file" accept="image/*" onchange="handleUpload(2,this)">
+        <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handleUpload(2,this)">
+        <span class="upload-slot-icon">➕</span>
+        <span class="upload-slot-label">Add photo</span>
+        <button class="upload-slot-remove" onclick="removePhoto(event,2)">×</button>
+        <div class="photo-menu">
+          <button class="photo-menu-btn photo-menu-cam" onclick="triggerCamera(event,2)">📷 Take photo</button>
+          <button class="photo-menu-btn photo-menu-lib" onclick="triggerLibrary(event,2)">🖼️ Choose from library</button>
+          <button class="photo-menu-btn photo-menu-cancel" onclick="closePhotoMenu(event,2)">Cancel</button>
+        </div>
+      </div>
+      <div class="upload-slot" id="slot-3" onclick="openPhotoMenu(event,3)">
+        <span class="upload-slot-num">4</span>
+        <input type="file" accept="image/*" onchange="handleUpload(3,this)">
+        <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handleUpload(3,this)">
+        <span class="upload-slot-icon">➕</span>
+        <span class="upload-slot-label">Add photo</span>
+        <button class="upload-slot-remove" onclick="removePhoto(event,3)">×</button>
+        <div class="photo-menu">
+          <button class="photo-menu-btn photo-menu-cam" onclick="triggerCamera(event,3)">📷 Take photo</button>
+          <button class="photo-menu-btn photo-menu-lib" onclick="triggerLibrary(event,3)">🖼️ Choose from library</button>
+          <button class="photo-menu-btn photo-menu-cancel" onclick="closePhotoMenu(event,3)">Cancel</button>
+        </div>
+      </div>
+      <div class="upload-slot" id="slot-4" onclick="openPhotoMenu(event,4)">
+        <span class="upload-slot-num">5</span>
+        <input type="file" accept="image/*" onchange="handleUpload(4,this)">
+        <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handleUpload(4,this)">
+        <span class="upload-slot-icon">➕</span>
+        <span class="upload-slot-label">Add photo</span>
+        <button class="upload-slot-remove" onclick="removePhoto(event,4)">×</button>
+        <div class="photo-menu">
+          <button class="photo-menu-btn photo-menu-cam" onclick="triggerCamera(event,4)">📷 Take photo</button>
+          <button class="photo-menu-btn photo-menu-lib" onclick="triggerLibrary(event,4)">🖼️ Choose from library</button>
+          <button class="photo-menu-btn photo-menu-cancel" onclick="closePhotoMenu(event,4)">Cancel</button>
+        </div>
+      </div>
+      <div class="upload-slot" id="slot-5" onclick="openPhotoMenu(event,5)">
+        <span class="upload-slot-num">6</span>
+        <input type="file" accept="image/*" onchange="handleUpload(5,this)">
+        <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handleUpload(5,this)">
+        <span class="upload-slot-icon">➕</span>
+        <span class="upload-slot-label">Add photo</span>
+        <button class="upload-slot-remove" onclick="removePhoto(event,5)">×</button>
+        <div class="photo-menu">
+          <button class="photo-menu-btn photo-menu-cam" onclick="triggerCamera(event,5)">📷 Take photo</button>
+          <button class="photo-menu-btn photo-menu-lib" onclick="triggerLibrary(event,5)">🖼️ Choose from library</button>
+          <button class="photo-menu-btn photo-menu-cancel" onclick="closePhotoMenu(event,5)">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <p class="upload-main-tip">📸 JPG, PNG or HEIC · Max 10 MB per photo · Must show your face</p>
+    <a class="btn-primary" href="#early-access" style="display:inline-block">Save &amp; continue →</a>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<section style="background:var(--sand)">
+  <div class="sec-inner" style="max-width:560px;margin:0 auto;text-align:center">
+    <div class="sec-eye">Discovery Filters</div>
+    <h2 class="sec-title">Find exactly who you're looking for</h2>
+    <p class="sec-sub" style="margin:0 auto 32px">Set your age range and distance — we'll show you people that match.</p>
+    <div class="filter-card">
+
+      <!-- Age range -->
+      <div class="filter-row">
+        <div class="filter-label">
+          <span class="filter-label-text">👤 Age range</span>
+          <span class="filter-label-val" id="age-val">22 – 35 yrs</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"></div>
+          <div class="range-fill" id="age-fill"></div>
+          <input class="range-input" id="age-min" type="range" min="18" max="65" value="22" oninput="updateFilters()">
+          <input class="range-input upper" id="age-max" type="range" min="18" max="65" value="35" oninput="updateFilters()">
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px"><span>18</span><span>65+</span></div>
+      </div>
+
+      <!-- Distance -->
+      <div class="filter-row" style="margin-bottom:8px">
+        <div class="filter-label">
+          <span class="filter-label-text">📍 Max distance</span>
+          <span class="filter-label-val" id="dist-val">25 km</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"></div>
+          <div class="range-fill" id="dist-fill"></div>
+          <input class="range-input upper" id="dist-slider" type="range" min="1" max="200" value="25" oninput="updateFilters()">
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px"><span>1 km</span><span>200 km</span></div>
+      </div>
+
+      <!-- State selection -->
+      <div class="filter-row" style="margin-bottom:8px">
+        <div class="filter-label">
+          <span class="filter-label-text">🗺️ States &amp; territories</span>
+          <span class="filter-label-val" id="state-val">All states</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px" id="state-chips">
+          <button class="state-chip active" data-state="NSW" onclick="toggleState(this)">NSW</button>
+          <button class="state-chip active" data-state="VIC" onclick="toggleState(this)">VIC</button>
+          <button class="state-chip active" data-state="QLD" onclick="toggleState(this)">QLD</button>
+          <button class="state-chip active" data-state="WA" onclick="toggleState(this)">WA</button>
+          <button class="state-chip active" data-state="SA" onclick="toggleState(this)">SA</button>
+          <button class="state-chip active" data-state="TAS" onclick="toggleState(this)">TAS</button>
+          <button class="state-chip active" data-state="ACT" onclick="toggleState(this)">ACT</button>
+          <button class="state-chip active" data-state="NT" onclick="toggleState(this)">NT</button>
+        </div>
+        <button onclick="selectAllStates()" style="margin-top:10px;background:none;border:none;font-size:12px;color:var(--coral);font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0">Select all</button>
+      </div>
+
+      <!-- Result count -->
+      <div class="filter-result">
+        <span class="filter-result-text">Matching profiles near you</span>
+        <span class="filter-result-count" id="filter-count">1,240</span>
+      </div>
+
+      <button class="filter-apply" onclick="showToast('🔍 Filters applied — join waitlist to see your matches!')">Apply filters →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE PROFILES -->
+<section class="profiles-bg">
+  <div class="sec-inner">
+    <div class="sec-eye">Who you'll meet</div>
+    <h2 class="sec-title">Real Aussies, real stories</h2>
+    <p class="sec-sub">Every profile is a real person looking for a genuine connection.</p>
+    <div class="profiles-scroll">
+      <div class="pcard" onclick="showProfile('mia')">
+        <div class="pcard-photo" id="pcard-photo-mia" style="background:linear-gradient(135deg,#FFD6C8,#FFB5A0)">
+          <span class="pcard-photo-emoji">👩‍🦰</span>
+          <div class="pcard-verified">✓ Verified</div>
+          <input type="file" accept="image/*" onchange="handlePcardUpload('mia',this)">
+          <input type="file" accept="image/*" capture="environment" onchange="handlePcardUpload('mia',this)">
+          <button class="pcard-photo-edit" onclick="openPcardMenu(event,'mia')" title="Change photo">📷</button>
+          <div class="photo-menu">
+            <button class="photo-menu-btn photo-menu-cam" onclick="triggerPcardCamera(event,'mia')">📷 Take photo</button>
+            <button class="photo-menu-btn photo-menu-lib" onclick="triggerPcardLibrary(event,'mia')">🖼️ Choose from library</button>
+            <button class="photo-menu-btn photo-menu-cancel" onclick="closePcardMenu(event,'mia')">Cancel</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div class="pcard-name">Mia, 26</div>
+          <div class="pcard-loc">📍 Sydney, NSW</div>
+          <div class="pcard-bio">Beach runs &amp; flat whites ☕</div>
+          <div class="pcard-tags"><span class="pcard-tag">Hiking</span><span class="pcard-tag">Coffee</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showProfile('jake')">
+        <div class="pcard-photo" id="pcard-photo-jake" style="background:linear-gradient(135deg,#C8D6FF,#A0B5FF)">
+          <span class="pcard-photo-emoji">🧔</span>
+          <div class="pcard-verified">✓ Verified</div>
+          <input type="file" accept="image/*" onchange="handlePcardUpload('jake',this)">
+          <input type="file" accept="image/*" capture="environment" onchange="handlePcardUpload('jake',this)">
+          <button class="pcard-photo-edit" onclick="openPcardMenu(event,'jake')" title="Change photo">📷</button>
+          <div class="photo-menu">
+            <button class="photo-menu-btn photo-menu-cam" onclick="triggerPcardCamera(event,'jake')">📷 Take photo</button>
+            <button class="photo-menu-btn photo-menu-lib" onclick="triggerPcardLibrary(event,'jake')">🖼️ Choose from library</button>
+            <button class="photo-menu-btn photo-menu-cancel" onclick="closePcardMenu(event,'jake')">Cancel</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div class="pcard-name">Jake, 29</div>
+          <div class="pcard-loc">📍 Melbourne, VIC</div>
+          <div class="pcard-bio">Footy tragic &amp; home cook 🏉</div>
+          <div class="pcard-tags"><span class="pcard-tag">AFL</span><span class="pcard-tag">Cooking</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showProfile('priya')">
+        <div class="pcard-photo" id="pcard-photo-priya" style="background:linear-gradient(135deg,#D6C8FF,#B5A0FF)">
+          <span class="pcard-photo-emoji">👩‍🦱</span>
+          <input type="file" accept="image/*" onchange="handlePcardUpload('priya',this)">
+          <input type="file" accept="image/*" capture="environment" onchange="handlePcardUpload('priya',this)">
+          <button class="pcard-photo-edit" onclick="openPcardMenu(event,'priya')" title="Change photo">📷</button>
+          <div class="photo-menu">
+            <button class="photo-menu-btn photo-menu-cam" onclick="triggerPcardCamera(event,'priya')">📷 Take photo</button>
+            <button class="photo-menu-btn photo-menu-lib" onclick="triggerPcardLibrary(event,'priya')">🖼️ Choose from library</button>
+            <button class="photo-menu-btn photo-menu-cancel" onclick="closePcardMenu(event,'priya')">Cancel</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div class="pcard-name">Priya, 24</div>
+          <div class="pcard-loc">📍 Brisbane, QLD</div>
+          <div class="pcard-bio">Hiker, reader, terrible puns 📚</div>
+          <div class="pcard-tags"><span class="pcard-tag">Reading</span><span class="pcard-tag">Travel</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showProfile('tom')">
+        <div class="pcard-photo" id="pcard-photo-tom" style="background:linear-gradient(135deg,#C8FFD6,#A0FFB5)">
+          <span class="pcard-photo-emoji">👨‍🦳</span>
+          <div class="pcard-verified">✓ Verified</div>
+          <input type="file" accept="image/*" onchange="handlePcardUpload('tom',this)">
+          <input type="file" accept="image/*" capture="environment" onchange="handlePcardUpload('tom',this)">
+          <button class="pcard-photo-edit" onclick="openPcardMenu(event,'tom')" title="Change photo">📷</button>
+          <div class="photo-menu">
+            <button class="photo-menu-btn photo-menu-cam" onclick="triggerPcardCamera(event,'tom')">📷 Take photo</button>
+            <button class="photo-menu-btn photo-menu-lib" onclick="triggerPcardLibrary(event,'tom')">🖼️ Choose from library</button>
+            <button class="photo-menu-btn photo-menu-cancel" onclick="closePcardMenu(event,'tom')">Cancel</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div class="pcard-name">Tom, 32</div>
+          <div class="pcard-loc">📍 Perth, WA</div>
+          <div class="pcard-bio">Surfer, vet, dog dad 🐕</div>
+          <div class="pcard-tags"><span class="pcard-tag">Surfing</span><span class="pcard-tag">Dogs</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showProfile('grace')">
+        <div class="pcard-photo" id="pcard-photo-grace" style="background:linear-gradient(135deg,#FFE4C8,#FFCDA0)">
+          <span class="pcard-photo-emoji">👩‍🦳</span>
+          <div class="pcard-verified">✓ Verified</div>
+          <input type="file" accept="image/*" onchange="handlePcardUpload('grace',this)">
+          <input type="file" accept="image/*" capture="environment" onchange="handlePcardUpload('grace',this)">
+          <button class="pcard-photo-edit" onclick="openPcardMenu(event,'grace')" title="Change photo">📷</button>
+          <div class="photo-menu">
+            <button class="photo-menu-btn photo-menu-cam" onclick="triggerPcardCamera(event,'grace')">📷 Take photo</button>
+            <button class="photo-menu-btn photo-menu-lib" onclick="triggerPcardLibrary(event,'grace')">🖼️ Choose from library</button>
+            <button class="photo-menu-btn photo-menu-cancel" onclick="closePcardMenu(event,'grace')">Cancel</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div class="pcard-name">Grace, 28</div>
+          <div class="pcard-loc">📍 Adelaide, SA</div>
+          <div class="pcard-bio">Wine lover &amp; yoga teacher 🍷</div>
+          <div class="pcard-tags"><span class="pcard-tag">Yoga</span><span class="pcard-tag">Wine</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showProfile('liam')">
+        <div class="pcard-photo" id="pcard-photo-liam" style="background:linear-gradient(135deg,#C8FFFF,#A0EFFF)">
+          <span class="pcard-photo-emoji">🧑‍🦱</span>
+          <input type="file" accept="image/*" onchange="handlePcardUpload('liam',this)">
+          <input type="file" accept="image/*" capture="environment" onchange="handlePcardUpload('liam',this)">
+          <button class="pcard-photo-edit" onclick="openPcardMenu(event,'liam')" title="Change photo">📷</button>
+          <div class="photo-menu">
+            <button class="photo-menu-btn photo-menu-cam" onclick="triggerPcardCamera(event,'liam')">📷 Take photo</button>
+            <button class="photo-menu-btn photo-menu-lib" onclick="triggerPcardLibrary(event,'liam')">🖼️ Choose from library</button>
+            <button class="photo-menu-btn photo-menu-cancel" onclick="closePcardMenu(event,'liam')">Cancel</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div class="pcard-name">Liam, 27</div>
+          <div class="pcard-loc">📍 Darwin, NT</div>
+          <div class="pcard-bio">Fisherman &amp; stargazer 🌌</div>
+          <div class="pcard-tags"><span class="pcard-tag">Fishing</span><span class="pcard-tag">Outdoors</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section>
+  <div class="sec-inner">
+    <div class="sec-eye">Trust &amp; Safety</div>
+    <h2 class="sec-title">Your safety is<br>non-negotiable</h2>
+    <p class="sec-sub">We built every safety feature before we built anything else.</p>
+    <div class="safety-grid">
+      <div class="safety-card">
+        <div class="safety-icon" style="background:rgba(0,105,62,.1)">🚩</div>
+        <div>
+          <div class="safety-title">Report in two taps</div>
+          <div class="safety-body">Tap any profile or chat to report harassment, fake profiles, scams, or inappropriate content. Anonymous and reviewed within 24 hours.</div>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon" style="background:rgba(0,105,62,.1)">🔇</div>
+        <div>
+          <div class="safety-title">Instant block</div>
+          <div class="safety-body">Block anyone instantly. Blocked users can't see your profile, find you in search, or contact you — permanently.</div>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon" style="background:rgba(0,105,62,.1)">🤖</div>
+        <div>
+          <div class="safety-title">AI moderation</div>
+          <div class="safety-body">Automated systems scan photos and messages for harmful content 24/7, before a human reviewer even sees it.</div>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon" style="background:rgba(0,105,62,.1)">📋</div>
+        <div>
+          <div class="safety-title">Online Safety Act 2021</div>
+          <div class="safety-body">Fully compliant with Australia's Online Safety Act. eSafety Commissioner notices are actioned within the required timeframe.</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="#" onclick="openSafetySheet();return false" class="btn-secondary" style="display:inline-block">Read our Safety Guide →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-bg">
+  <div class="sec-inner">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="sec-eye">Plans</div>
+      <h2 class="sec-title" style="text-align:center">Fair pricing.<br>No surprises.</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">Free to match. Premium unlocks unlimited likes and more visibility.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">Free</div>
+        <div class="pricing-price">$0</div>
+        <div class="pricing-period">forever</div>
+        <ul class="pricing-features">
+          <li>10 likes per day</li>
+          <li>Unlimited matches &amp; chat</li>
+          <li>Basic profile</li>
+          <li>Report &amp; block</li>
+        </ul>
+        <button class="pricing-btn pricing-btn-outline" onclick="showToast('Free plan — launching soon! Join the waitlist.')">Get started free</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-tier">Plus</div>
+        <div class="pricing-price">$19<span style="font-size:18px;font-weight:400">.99</span></div>
+        <div class="pricing-period">per month · AUD</div>
+        <ul class="pricing-features">
+          <li>Unlimited likes</li>
+          <li>See who liked you</li>
+          <li>1 profile boost / month</li>
+          <li>Advanced filters</li>
+          <li>Read receipts</li>
+        </ul>
+        <button class="pricing-btn pricing-btn-fill" onclick="showToast('Plus plan — launching soon! Join the waitlist.')">Start with Plus</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Gold</div>
+        <div class="pricing-price">$34<span style="font-size:18px;font-weight:400">.99</span></div>
+        <div class="pricing-period">per month · AUD</div>
+        <ul class="pricing-features">
+          <li>Everything in Plus</li>
+          <li>5 profile boosts / month</li>
+          <li>Priority in discovery</li>
+          <li>Gold badge on profile</li>
+          <li>Dedicated support</li>
+        </ul>
+        <button class="pricing-btn pricing-btn-outline" onclick="showToast('Gold plan — launching soon! Join the waitlist.')">Go Gold</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARLY ACCESS -->
+<section class="signup-bg" id="early-access">
+  <div class="signup-inner" id="signup-section">
+    <div class="signup-eye">Launching soon</div>
+    <h2 class="signup-title">Be the first to crush it</h2>
+    <p class="signup-sub">Drop your email and we'll let you know the moment OzzieCrush goes live. Early signups get 3 months of Plus free.</p>
+    <div class="signup-form" id="signup-form">
+      <input class="signup-input" id="signup-email" type="email" placeholder="your@email.com.au" autocomplete="email">
+      <button class="signup-btn" onclick="submitSignup()">Join waitlist</button>
+    </div>
+    <p id="signup-error" style="color:rgba(255,248,240,.8);font-size:12px;margin-top:8px;display:none"></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">OzzieCrush 🦘</div>
+        <div class="footer-tagline">The dating app made for Aussies. Real people, real connections.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#" onclick="openSafetySheet();return false">Safety</a>
+        <a href="#" onclick="showToast('Privacy Policy — coming soon');return false">Privacy Policy</a>
+        <a href="#" onclick="showToast('Terms of Service — coming soon');return false">Terms of Service</a>
+        <a href="mailto:support@ozziecrush.com.au">Contact</a>
+      </div>
+    </div>
+    <div class="footer-badges">
+      <span class="footer-badge">🇦🇺 Privacy Act 1988 compliant</span>
+      <span class="footer-badge">🛡️ Online Safety Act 2021</span>
+      <span class="footer-badge">🔒 Data stored in Sydney, AU</span>
+      <span class="footer-badge">18+ only</span>
+      <span class="footer-badge">ABN TBC</span>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 OzzieCrush. All rights reserved. ozziecrush.com.au</span>
+      <span>support@ozziecrush.com.au</span>
+    </div>
+  </div>
+</footer>
+
+<!-- OVERLAY -->
+<div id="bs-overlay" onclick="closeSheet()"></div>
+
+<!-- PROFILE SHEET -->
+<div class="bottom-sheet" id="profile-sheet">
+  <div class="bs-handle"></div>
+  <div style="padding:0 20px 32px">
+    <div id="ps-content"></div>
+    <button onclick="closeSheet()" style="width:100%;margin-top:16px;padding:14px;border-radius:40px;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif">Close</button>
+  </div>
+</div>
+
+<!-- SAFETY SHEET -->
+<div class="bottom-sheet" id="safety-sheet">
+  <div class="bs-handle"></div>
+  <div style="padding:0 20px 32px">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:36px;margin-bottom:6px">🛡️</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--dark)">Safety Guide</h2>
+      <p style="font-size:12px;color:var(--muted);margin-top:4px">Your safety is our first priority</p>
+    </div>
+    <div style="background:var(--dark);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;gap:10px;align-items:center">
+      <span style="font-size:20px">🚨</span>
+      <div><div style="font-size:12px;font-weight:800;color:var(--gold)">EMERGENCY?</div><div style="font-size:11px;color:rgba(255,255,255,.9)">Call <strong>000</strong> (Police/Ambos/Fire) · <strong>1800 RESPECT</strong> (1800 737 732)</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="background:var(--sand);border-radius:12px;padding:14px">
+        <div style="font-size:13px;font-weight:800;color:var(--dark);margin-bottom:8px">🌐 Online Safety</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--muted);display:flex;gap:8px"><span>🔒</span><span>Never share your home address, bank details, or ID photos</span></li>
+          <li style="font-size:12px;color:var(--muted);display:flex;gap:8px"><span>📸</span><span>Stay on OzzieCrush messaging — moving to WhatsApp reveals your number</span></li>
+          <li style="font-size:12px;color:var(--muted);display:flex;gap:8px"><span>🚩</span><span>Anyone asking for money is a scammer — 100% of the time</span></li>
+        </ul>
+      </div>
+      <div style="background:var(--sand);border-radius:12px;padding:14px">
+        <div style="font-size:13px;font-weight:800;color:var(--dark);margin-bottom:8px">🤝 First Date</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--muted);display:flex;gap:8px"><span>📍</span><span>Always meet in a public place — café, pub, shopping centre</span></li>
+          <li style="font-size:12px;color:var(--muted);display:flex;gap:8px"><span>📢</span><span>Tell a mate or family member where you're going</span></li>
+          <li style="font-size:12px;color:var(--muted);display:flex;gap:8px"><span>🚗</span><span>Arrange your own transport — Uber, own car, public transport</span></li>
+        </ul>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px">
+        <div style="font-size:13px;font-weight:800;color:var(--dark);margin-bottom:8px">📞 AU Helplines</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:var(--sand);border-radius:8px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Emergency</div><div style="font-size:22px;font-weight:900;color:var(--coral)">000</div></div>
+          <div style="background:var(--sand);border-radius:8px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">1800 RESPECT</div><div style="font-size:16px;font-weight:900;color:var(--coral)">1800 737 732</div></div>
+          <div style="background:var(--sand);border-radius:8px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Lifeline</div><div style="font-size:22px;font-weight:900;color:var(--coral)">13 11 14</div></div>
+          <div style="background:var(--sand);border-radius:8px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Cyber Report</div><div style="font-size:16px;font-weight:900;color:var(--coral)">cyber.gov.au</div></div>
+        </div>
+      </div>
+    </div>
+    <button onclick="closeSheet()" style="width:100%;margin-top:16px;padding:14px;border-radius:40px;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif">Close</button>
+  </div>
+</div>
+
+<!-- CAMERA MODAL -->
+<div id="cam-modal">
+  <div class="cam-box">
+    <video id="cam-video" autoplay playsinline muted></video>
+    <canvas id="cam-canvas"></canvas>
+    <div class="cam-controls">
+      <button class="cam-close" onclick="camClose()">✕ Cancel</button>
+      <button class="cam-capture" onclick="camCapture()" title="Take photo">📸</button>
+      <button class="cam-flip" onclick="camFlip()" title="Flip camera">🔄</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ── AGE GATE ──
+let _agOTP = '';
+let _agResendTimer = null;
+
+(function() {
+  if (sessionStorage.getItem('oz_age_ok') === '1') {
+    document.getElementById('age-gate').style.display = 'none';
+  }
+})();
+
+function agShow(stepId) {
+  ['ag-step1','ag-step2','ag-step3','ag-denied'].forEach(id => {
+    document.getElementById(id).style.display = id === stepId ? 'block' : 'none';
+  });
+}
+
+function agStep2() { agShow('ag-step2'); setTimeout(() => document.getElementById('ag-mobile').focus(), 100); }
+function agGoStep1() { agShow('ag-step1'); }
+function agGoStep2() { agShow('ag-step2'); }
+function agDeny() { agShow('ag-denied'); }
+
+function agToggleIam(val) {
+  ['man','woman','other'].forEach(v => document.getElementById('iam-'+v).classList.toggle('active', v===val));
+}
+function agToggleSeek(val) {
+  ['man','woman','everyone'].forEach(v => document.getElementById('seek-'+v).classList.toggle('active', v===val));
+}
+function agToggleAge(val) {
+  const map = {'18-24':'18','25-34':'25','35-44':'35','45+':'45'};
+  Object.keys(map).forEach(k => document.getElementById('age-'+map[k]).classList.toggle('active', k===val));
+}
+
+function agMobileInput(el) {
+  el.value = el.value.replace(/[^0-9\s]/g,'');
+  document.getElementById('ag-mobile-err').style.display = 'none';
+}
+
+function agSendOTP() {
+  const raw = document.getElementById('ag-mobile').value.replace(/\s/g,'');
+  if (raw.length < 4) {
+    document.getElementById('ag-mobile-err').style.display = 'block';
+    return;
+  }
+  // Generate demo OTP
+  _agOTP = String(Math.floor(1000 + Math.random() * 9000));
+  const display = raw.startsWith('0') ? '+61 ' + raw.slice(1) : '+61 ' + raw;
+  document.getElementById('ag-otp-sub').textContent = 'We sent a 4-digit code to ' + display + '. Enter it below.';
+  agShow('ag-step3');
+  // Show code on screen (demo only — in production a real SMS would be sent)
+  document.getElementById('ag-demo-code-num').textContent = _agOTP;
+  document.getElementById('ag-demo-code').style.display = 'block';
+  agStartResendTimer();
+  setTimeout(() => document.querySelector('.ag-otp-box').focus(), 100);
+}
+
+function agOtpInput(el, idx) {
+  el.value = el.value.replace(/[^0-9]/g,'');
+  el.classList.toggle('filled', el.value !== '');
+  if (el.value && idx < 3) {
+    document.querySelectorAll('.ag-otp-box')[idx + 1].focus();
+  }
+  document.getElementById('ag-otp-err').style.display = 'none';
+  const boxes = document.querySelectorAll('.ag-otp-box');
+  if (idx === 3 && el.value && Array.from(boxes).every(b => b.value)) {
+    agVerifyOTP();
+  }
+}
+
+function agOtpKey(e, idx) {
+  if (e.key === 'Backspace') {
+    const boxes = document.querySelectorAll('.ag-otp-box');
+    if (!boxes[idx].value && idx > 0) { boxes[idx-1].focus(); boxes[idx-1].value = ''; boxes[idx-1].classList.remove('filled'); }
+  }
+}
+
+function agVerifyOTP() {
+  const entered = Array.from(document.querySelectorAll('.ag-otp-box')).map(b => b.value).join('');
+  if (entered === _agOTP) {
+    sessionStorage.setItem('oz_age_ok', '1');
+    const gate = document.getElementById('age-gate');
+    gate.classList.add('hiding');
+    setTimeout(() => gate.style.display = 'none', 500);
+  } else {
+    document.getElementById('ag-otp-err').style.display = 'block';
+    document.querySelectorAll('.ag-otp-box').forEach(b => { b.value=''; b.classList.remove('filled'); });
+    document.querySelector('.ag-otp-box').focus();
+  }
+}
+
+function agResend() {
+  _agOTP = String(Math.floor(1000 + Math.random() * 9000));
+  document.getElementById('ag-demo-code-num').textContent = _agOTP;
+  document.getElementById('ag-resend-btn').style.display = 'none';
+  agStartResendTimer();
+}
+
+function agStartResendTimer() {
+  let secs = 60;
+  const btn = document.getElementById('ag-resend-btn');
+  const timer = document.getElementById('ag-resend-timer');
+  btn.style.display = 'none';
+  timer.style.display = 'inline';
+  clearInterval(_agResendTimer);
+  _agResendTimer = setInterval(() => {
+    timer.textContent = '(resend in ' + secs + 's)';
+    if (--secs < 0) { clearInterval(_agResendTimer); timer.style.display='none'; btn.style.display='inline'; }
+  }, 1000);
+}
+
+// ── DEMO PROFILES ──
+const demoProfiles = [
+  {emoji:'👩‍🦰',name:'Mia, 26',loc:'📍 Sydney, NSW',bio:'Beach runs & flat whites ☕',verified:true},
+  {emoji:'🧔',name:'Jake, 29',loc:'📍 Melbourne, VIC',bio:'Footy tragic & home cook 🏉',verified:true},
+  {emoji:'👩‍🦱',name:'Priya, 24',loc:'📍 Brisbane, QLD',bio:'Hiker, reader, terrible puns 📚',verified:false},
+  {emoji:'👨‍🦳',name:'Tom, 32',loc:'📍 Perth, WA',bio:'Surfer, vet, dog dad 🐕',verified:true},
+  {emoji:'👩‍🦳',name:'Grace, 28',loc:'📍 Adelaide, SA',bio:'Wine lover & yoga teacher 🍷',verified:true},
+];
+let demoIdx = 0;
+
+function demoSwipe(dir) {
+  const card = document.getElementById('demo-card');
+  card.style.transition = 'transform .35s ease, opacity .35s ease';
+  card.style.transform = dir === 'like' ? 'rotate(10deg) translateX(80px)' : dir === 'pass' ? 'rotate(-10deg) translateX(-80px)' : 'translateY(-60px)';
+  card.style.opacity = '0';
+  if (dir === 'like') showToast('❤️ Liked!');
+  else if (dir === 'super') showToast('⭐ Super Liked!');
+  else showToast('✕ Passed');
+  setTimeout(() => {
+    demoIdx = (demoIdx + 1) % demoProfiles.length;
+    const p = demoProfiles[demoIdx];
+    document.getElementById('demo-emoji').textContent = p.emoji;
+    document.getElementById('demo-name').textContent = p.name;
+    document.getElementById('demo-loc').textContent = p.loc;
+    document.getElementById('demo-bio').textContent = p.bio;
+    document.getElementById('demo-badge').style.display = p.verified ? 'block' : 'none';
+    card.style.transition = 'none';
+    card.style.transform = 'none';
+    card.style.opacity = '1';
+  }, 380);
+}
+
+// ── PROFILES DATA ──
+const profileData = {
+  mia:  {emoji:'👩‍🦰',name:'Mia',age:26,loc:'Sydney, NSW',bio:"Beach runner, flat white addict, and amateur surfer. Looking for someone who doesn't mind sand in the car.",tags:['Hiking','Coffee','Surfing','Dogs'],verified:true,
+    photos:['👩‍🦰','🏄‍♀️','☕','🐕','🌊','🌅']},
+  jake: {emoji:'🧔',name:'Jake',age:29,loc:'Melbourne, VIC',bio:"Die-hard Carlton supporter (yes, I know). Love cooking Sunday roasts and exploring regional Victoria.",tags:['AFL','Cooking','Wine','Travel'],verified:true,
+    photos:['🧔','🍳','🏉','🍷','🚗','🌄']},
+  priya:{emoji:'👩‍🦱',name:'Priya',age:24,loc:'Brisbane, QLD',bio:"PhD student, bookworm, champion of terrible puns. Looking for someone to explore hiking trails and brunch spots.",tags:['Reading','Hiking','Brunch','Yoga'],verified:false,
+    photos:['👩‍🦱','📚','🥾','🧘‍♀️','🥞','🌿']},
+  tom:  {emoji:'👨‍🦳',name:'Tom',age:32,loc:'Perth, WA',bio:"Vet by day, surfer by weekend. Dog dad to Biscuit (golden retriever). Indian Ocean sunsets never get old.",tags:['Surfing','Dogs','Beach','Cooking'],verified:true,
+    photos:['👨‍🦳','🐕','🏄','🌊','🍳','🌇']},
+  grace:{emoji:'👩‍🦳',name:'Grace',age:28,loc:'Adelaide, SA',bio:"Yoga teacher who takes Barossa wine very seriously. Love live music, farmers markets, and long drives through the hills.",tags:['Yoga','Wine','Music','Hiking'],verified:true,
+    photos:['👩‍🦳','🧘‍♀️','🍷','🎵','🛒','🏔️']},
+  liam: {emoji:'🧑‍🦱',name:'Liam',age:27,loc:'Darwin, NT',bio:"Fishing guide and amateur astronomer. The Territory has the best skies in the country — fight me.",tags:['Fishing','Astronomy','Outdoors','Camping'],verified:false,
+    photos:['🧑‍🦱','🎣','🔭','🏕️','🌌','🐊']},
+};
+
+function showProfile(id) {
+  const p = profileData[id];
+  if (!p) return;
+  const photoGrid = p.photos.map((ph, i) => `
+    <div style="aspect-ratio:1;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:32px;position:relative;overflow:hidden;border:2px solid var(--line)">
+      ${ph}
+      ${i===0 && p.verified ? '<span style="position:absolute;bottom:5px;right:5px;background:var(--coral);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px">✓</span>' : ''}
+    </div>`).join('');
+  const html = `
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:16px">
+      ${photoGrid}
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--dark)">${p.name}, ${p.age}</h2>
+      ${p.verified ? '<span style="background:var(--coral);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px">✓ Verified</span>' : ''}
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:10px">📍 ${p.loc}</p>
+    <p style="font-size:14px;color:var(--dark);line-height:1.7;margin-bottom:14px">${p.bio}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px">${p.tags.map(t=>`<span style="background:var(--coral-light);color:var(--coral);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px">${t}</span>`).join('')}</div>
+    <div style="display:flex;gap:10px">
+      <button onclick="showToast('❤️ Liked ${p.name}!')" style="flex:1;padding:14px;border-radius:40px;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif">❤️ Like</button>
+      <button onclick="showToast('⭐ Super liked ${p.name}!')" style="padding:14px 18px;border-radius:40px;background:#fff;color:var(--dark);font-size:14px;font-weight:700;border:2px solid var(--line);cursor:pointer;font-family:'DM Sans',sans-serif">⭐</button>
+    </div>`;
+  document.getElementById('ps-content').innerHTML = html;
+  document.getElementById('bs-overlay').classList.add('open');
+  document.getElementById('profile-sheet').classList.add('open');
+}
+
+function openSafetySheet() {
+  document.getElementById('bs-overlay').classList.add('open');
+  document.getElementById('safety-sheet').classList.add('open');
+}
+
+function closeSheet() {
+  document.getElementById('bs-overlay').classList.remove('open');
+  document.querySelectorAll('.bottom-sheet').forEach(s => s.classList.remove('open'));
+}
+
+// ── FILTERS ──
+function updateFilters() {
+  // Age range
+  let amin = parseInt(document.getElementById('age-min').value);
+  let amax = parseInt(document.getElementById('age-max').value);
+  if (amin > amax) { const t=amin; amin=amax; amax=t; }
+  document.getElementById('age-val').textContent = amin + ' – ' + (amax >= 65 ? '65+' : amax) + ' yrs';
+  const aPct1 = (amin-18)/(65-18)*100, aPct2 = (amax-18)/(65-18)*100;
+  document.getElementById('age-fill').style.left = aPct1+'%';
+  document.getElementById('age-fill').style.width = (aPct2-aPct1)+'%';
+
+  // Distance
+  const dist = parseInt(document.getElementById('dist-slider').value);
+  document.getElementById('dist-val').textContent = dist >= 200 ? 'Any state 🇦🇺' : dist + ' km';
+  document.getElementById('dist-fill').style.left = '0%';
+  document.getElementById('dist-fill').style.width = ((dist-1)/199*100)+'%';
+
+  // State label
+  const activeStates = Array.from(document.querySelectorAll('.state-chip.active')).map(b => b.dataset.state);
+  const allStates = document.querySelectorAll('.state-chip').length;
+  document.getElementById('state-val').textContent =
+    activeStates.length === 0 ? 'None selected' :
+    activeStates.length === allStates ? 'All states' :
+    activeStates.join(', ');
+
+  // Match count: age span × distance factor × state populations
+  const ageSpan = amax - amin;
+  const distFactor = dist >= 200 ? 1 : dist / 200;
+  const statePop = {NSW:32000,VIC:26000,QLD:20000,WA:11000,SA:8000,TAS:2500,ACT:2000,NT:1200};
+  const popTotal = activeStates.reduce((s,st) => s + (statePop[st]||0), 0);
+  const count = Math.round(popTotal * (ageSpan/47) * distFactor * 0.08);
+  document.getElementById('filter-count').textContent = activeStates.length === 0 ? '0' : Math.max(count, 12).toLocaleString();
+}
+
+// Init filters on load
+document.addEventListener('DOMContentLoaded', updateFilters);
+
+// ── STATE CHIPS ──
+const statePop = {NSW:32000,VIC:26000,QLD:20000,WA:11000,SA:8000,TAS:2500,ACT:2000,NT:1200};
+
+function toggleState(btn) {
+  btn.classList.toggle('active');
+  updateFilters();
+}
+
+function selectAllStates() {
+  document.querySelectorAll('.state-chip').forEach(b => b.classList.add('active'));
+  updateFilters();
+}
+
+// ── PHOTO UPLOAD ──
+// ── PHOTO SOURCE MENU ──
+function openPhotoMenu(e, idx) {
+  if (e.target.closest('.upload-slot-remove') || e.target.closest('.photo-menu-btn')) return;
+  document.querySelectorAll('.upload-slot.menu-open').forEach(s => s.classList.remove('menu-open'));
+  document.getElementById('slot-' + idx).classList.add('menu-open');
+}
+function closePhotoMenu(e, idx) {
+  e.stopPropagation();
+  document.getElementById('slot-' + idx).classList.remove('menu-open');
+}
+function triggerLibrary(e, idx) {
+  e.stopPropagation();
+  document.querySelectorAll('#slot-' + idx + ' input[type=file]')[0].click();
+  document.getElementById('slot-' + idx).classList.remove('menu-open');
+}
+function triggerCamera(e, idx) {
+  e.stopPropagation();
+  document.getElementById('slot-' + idx).classList.remove('menu-open');
+  if (window.isSecureContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    camOpen(dataUrl => applyPhotoToSlot(idx, dataUrl));
+  } else {
+    // getUserMedia is blocked on insecure origins (file://, plain http on a non-localhost
+    // address) on both desktop and mobile — fall back to the native camera app via the
+    // capture-attribute file input, which works over plain HTTP.
+    document.querySelectorAll('#slot-' + idx + ' input[type=file]')[1].click();
+  }
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.upload-slot')) {
+    document.querySelectorAll('.upload-slot.menu-open').forEach(s => s.classList.remove('menu-open'));
+  }
+  if (!e.target.closest('.pcard-photo')) {
+    document.querySelectorAll('.pcard-photo.menu-open').forEach(s => s.classList.remove('menu-open'));
+  }
+});
+
+// ── CAMERA (getUserMedia) ──
+let _camStream = null, _camApply = null, _camFacing = 'user';
+
+async function camOpen(applyFn) {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showToast('Camera not supported on this browser — use "Choose from library" instead');
+    return;
+  }
+  _camApply = applyFn;
+  _camFacing = 'user';
+  const ok = await camStart();
+  if (ok) document.getElementById('cam-modal').classList.add('open');
+}
+
+async function camStart() {
+  if (_camStream) { _camStream.getTracks().forEach(t => t.stop()); }
+  try {
+    _camStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: _camFacing, width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: false
+    });
+    document.getElementById('cam-video').srcObject = _camStream;
+    return true;
+  } catch(err) {
+    camClose();
+    showToast('Camera not available — use "Choose from library" instead');
+    return false;
+  }
+}
+
+async function camFlip() {
+  _camFacing = _camFacing === 'user' ? 'environment' : 'user';
+  await camStart();
+}
+
+function camCapture() {
+  const video = document.getElementById('cam-video');
+  const canvas = document.getElementById('cam-canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+  if (_camApply) _camApply(dataUrl);
+  camClose();
+}
+
+function camClose() {
+  if (_camStream) { _camStream.getTracks().forEach(t => t.stop()); _camStream = null; }
+  document.getElementById('cam-modal').classList.remove('open');
+  document.getElementById('cam-video').srcObject = null;
+}
+
+function applyPhotoToSlot(idx, dataUrl) {
+  const slot = document.getElementById('slot-' + idx);
+  const old = slot.querySelector('img');
+  if (old) old.remove();
+  const img = document.createElement('img');
+  img.src = dataUrl;
+  slot.insertBefore(img, slot.firstChild);
+  slot.classList.add('has-photo');
+  slot.querySelector('.upload-slot-icon').style.display = 'none';
+  slot.querySelector('.upload-slot-label').style.display = 'none';
+  updateUploadCount();
+}
+
+function handleUpload(idx, input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) { showToast('Max file size is 10 MB'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) { applyPhotoToSlot(idx, e.target.result); };
+  reader.readAsDataURL(file);
+}
+
+// ── SAMPLE PROFILE CARD PHOTOS (camera or file) ──
+function openPcardMenu(e, key) {
+  e.stopPropagation();
+  document.querySelectorAll('.pcard-photo.menu-open').forEach(s => s.classList.remove('menu-open'));
+  document.getElementById('pcard-photo-' + key).classList.add('menu-open');
+}
+function closePcardMenu(e, key) {
+  e.stopPropagation();
+  document.getElementById('pcard-photo-' + key).classList.remove('menu-open');
+}
+function triggerPcardLibrary(e, key) {
+  e.stopPropagation();
+  document.querySelectorAll('#pcard-photo-' + key + ' input[type=file]')[0].click();
+  document.getElementById('pcard-photo-' + key).classList.remove('menu-open');
+}
+function triggerPcardCamera(e, key) {
+  e.stopPropagation();
+  document.getElementById('pcard-photo-' + key).classList.remove('menu-open');
+  if (window.isSecureContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    camOpen(dataUrl => applyPhotoToPcard(key, dataUrl));
+  } else {
+    document.querySelectorAll('#pcard-photo-' + key + ' input[type=file]')[1].click();
+  }
+}
+function handlePcardUpload(key, input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) { showToast('Max file size is 10 MB'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) { applyPhotoToPcard(key, e.target.result); };
+  reader.readAsDataURL(file);
+}
+function applyPhotoToPcard(key, dataUrl) {
+  const photo = document.getElementById('pcard-photo-' + key);
+  const old = photo.querySelector('img');
+  if (old) old.remove();
+  const img = document.createElement('img');
+  img.src = dataUrl;
+  img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+  photo.insertBefore(img, photo.firstChild);
+  photo.classList.add('has-photo');
+  showToast('📸 Photo updated!');
+}
+
+function removePhoto(e, idx) {
+  e.stopPropagation();
+  const slot = document.getElementById('slot-' + idx);
+  const img = slot.querySelector('img');
+  if (img) img.remove();
+  slot.classList.remove('has-photo');
+  slot.querySelector('.upload-slot-icon').style.display = '';
+  slot.querySelector('.upload-slot-label').style.display = '';
+  slot.querySelector('input[type=file]').value = '';
+  updateUploadCount();
+}
+
+function updateUploadCount() {
+  const filled = document.querySelectorAll('.upload-slot.has-photo').length;
+  document.getElementById('upload-count').textContent = filled + ' of 6 photos added';
+}
+
+// ── SIGNUP ──
+function submitSignup() {
+  const email = document.getElementById('signup-email').value.trim();
+  const err = document.getElementById('signup-error');
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    err.textContent = 'Please enter a valid email address';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  document.getElementById('signup-form').innerHTML = `
+    <div class="signup-success">
+      <div class="signup-success-icon">🦘</div>
+      <div class="signup-success-title">You're on the list!</div>
+      <div class="signup-success-sub">We'll email you at ${email} when OzzieCrush launches. Early access gets 3 months of Plus free.</div>
+    </div>`;
+  showToast('🎉 You\'re on the waitlist!');
+}
+
+document.getElementById('signup-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitSignup();
+});
+
+// ── TOAST ──
+let _toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── FADE-UP OBSERVER ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); }});
+}, {threshold: 0.15});
+document.querySelectorAll('.fade-up').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  obs.observe(el);
+});
+
+// ── FOOTER YEAR ──
+document.addEventListener('DOMContentLoaded', () => {
+  const yr = new Date().getFullYear();
+  document.querySelectorAll('.footer-bottom span').forEach(s => {
+    s.textContent = s.textContent.replace('2026', yr);
+  });
+});
+</script>
+</body>
+</html>
