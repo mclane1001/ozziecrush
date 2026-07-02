@@ -123,6 +123,12 @@
   .pcard-photo-edit{position:absolute;bottom:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(10,31,18,.55);color:#fff;border:none;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
   .pcard-photo .photo-menu{z-index:3}
   .pcard-photo.menu-open .photo-menu{display:flex}
+  .grid-photo-cell{aspect-ratio:1;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:32px;position:relative;overflow:hidden;border:2px solid var(--line)}
+  .grid-photo-cell input[type=file]{display:none}
+  .grid-photo-edit{position:absolute;bottom:4px;right:4px;width:24px;height:24px;border-radius:50%;background:rgba(10,31,18,.55);color:#fff;border:none;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
+  .grid-photo-cell .photo-menu{z-index:3;padding:4px}
+  .grid-photo-cell .photo-menu-btn{font-size:10px;padding:6px 0}
+  .grid-photo-cell.menu-open .photo-menu{display:flex}
   .pcard-info{padding:14px}
   .pcard-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--dark)}
   .pcard-loc{font-size:11px;color:var(--muted);margin-top:2px}
@@ -1179,11 +1185,23 @@ const profileData = {
 function showProfile(id) {
   const p = profileData[id];
   if (!p) return;
-  const photoGrid = p.photos.map((ph, i) => `
-    <div style="aspect-ratio:1;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:32px;position:relative;overflow:hidden;border:2px solid var(--line)">
-      ${ph}
+  const photoGrid = p.photos.map((ph, i) => {
+    const key = id + '-' + i;
+    const override = gridPhotoOverrides[key];
+    return `
+    <div class="grid-photo-cell" id="gcell-${key}">
+      ${override ? `<img src="${override}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">` : `<span class="grid-photo-emoji">${ph}</span>`}
       ${i===0 && p.verified ? '<span style="position:absolute;bottom:5px;right:5px;background:var(--coral);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px">✓</span>' : ''}
-    </div>`).join('');
+      <input type="file" accept="image/*" onchange="handleGridUpload('${id}',${i},this)">
+      <input type="file" accept="image/*" capture="environment" onchange="handleGridUpload('${id}',${i},this)">
+      <button class="grid-photo-edit" onclick="openGridMenu(event,'${id}',${i})" title="Change photo">📷</button>
+      <div class="photo-menu">
+        <button class="photo-menu-btn photo-menu-cam" onclick="triggerGridCamera(event,'${id}',${i})">📷 Take</button>
+        <button class="photo-menu-btn photo-menu-lib" onclick="triggerGridLibrary(event,'${id}',${i})">🖼️ Library</button>
+        <button class="photo-menu-btn photo-menu-cancel" onclick="closeGridMenu(event,'${id}',${i})">Cancel</button>
+      </div>
+    </div>`;
+  }).join('');
   const html = `
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:16px">
       ${photoGrid}
@@ -1280,15 +1298,21 @@ function triggerLibrary(e, idx) {
   document.querySelectorAll('#slot-' + idx + ' input[type=file]')[0].click();
   document.getElementById('slot-' + idx).classList.remove('menu-open');
 }
+function canUseLiveCamera() {
+  // getUserMedia is blocked on file:// pages in Chrome even though isSecureContext
+  // reports true there, and on plain http on a non-localhost address isSecureContext
+  // correctly reports false — exclude file: explicitly, then fall back to the native
+  // camera app via the capture-attribute file input in either case.
+  return location.protocol !== 'file:' && window.isSecureContext
+    && navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
+}
+
 function triggerCamera(e, idx) {
   e.stopPropagation();
   document.getElementById('slot-' + idx).classList.remove('menu-open');
-  if (window.isSecureContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  if (canUseLiveCamera()) {
     camOpen(dataUrl => applyPhotoToSlot(idx, dataUrl));
   } else {
-    // getUserMedia is blocked on insecure origins (file://, plain http on a non-localhost
-    // address) on both desktop and mobile — fall back to the native camera app via the
-    // capture-attribute file input, which works over plain HTTP.
     document.querySelectorAll('#slot-' + idx + ' input[type=file]')[1].click();
   }
 }
@@ -1298,6 +1322,9 @@ document.addEventListener('click', function(e) {
   }
   if (!e.target.closest('.pcard-photo')) {
     document.querySelectorAll('.pcard-photo.menu-open').forEach(s => s.classList.remove('menu-open'));
+  }
+  if (!e.target.closest('.grid-photo-cell')) {
+    document.querySelectorAll('.grid-photo-cell.menu-open').forEach(c => c.classList.remove('menu-open'));
   }
 });
 
@@ -1393,7 +1420,7 @@ function triggerPcardLibrary(e, key) {
 function triggerPcardCamera(e, key) {
   e.stopPropagation();
   document.getElementById('pcard-photo-' + key).classList.remove('menu-open');
-  if (window.isSecureContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  if (canUseLiveCamera()) {
     camOpen(dataUrl => applyPhotoToPcard(key, dataUrl));
   } else {
     document.querySelectorAll('#pcard-photo-' + key + ' input[type=file]')[1].click();
@@ -1416,6 +1443,56 @@ function applyPhotoToPcard(key, dataUrl) {
   img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
   photo.insertBefore(img, photo.firstChild);
   photo.classList.add('has-photo');
+  showToast('📸 Photo updated!');
+}
+
+// ── PROFILE SHEET 6-PHOTO GRID (camera or file, per profile) ──
+const gridPhotoOverrides = {};
+function openGridMenu(e, id, idx) {
+  e.stopPropagation();
+  document.querySelectorAll('.grid-photo-cell.menu-open').forEach(c => c.classList.remove('menu-open'));
+  document.getElementById('gcell-' + id + '-' + idx).classList.add('menu-open');
+}
+function closeGridMenu(e, id, idx) {
+  e.stopPropagation();
+  document.getElementById('gcell-' + id + '-' + idx).classList.remove('menu-open');
+}
+function triggerGridLibrary(e, id, idx) {
+  e.stopPropagation();
+  const cell = document.getElementById('gcell-' + id + '-' + idx);
+  cell.querySelectorAll('input[type=file]')[0].click();
+  cell.classList.remove('menu-open');
+}
+function triggerGridCamera(e, id, idx) {
+  e.stopPropagation();
+  const cell = document.getElementById('gcell-' + id + '-' + idx);
+  cell.classList.remove('menu-open');
+  if (canUseLiveCamera()) {
+    camOpen(dataUrl => applyPhotoToGrid(id, idx, dataUrl));
+  } else {
+    cell.querySelectorAll('input[type=file]')[1].click();
+  }
+}
+function handleGridUpload(id, idx, input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) { showToast('Max file size is 10 MB'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) { applyPhotoToGrid(id, idx, e.target.result); };
+  reader.readAsDataURL(file);
+}
+function applyPhotoToGrid(id, idx, dataUrl) {
+  gridPhotoOverrides[id + '-' + idx] = dataUrl;
+  const cell = document.getElementById('gcell-' + id + '-' + idx);
+  if (!cell) return;
+  const oldImg = cell.querySelector('img');
+  if (oldImg) oldImg.remove();
+  const emojiSpan = cell.querySelector('.grid-photo-emoji');
+  if (emojiSpan) emojiSpan.style.display = 'none';
+  const img = document.createElement('img');
+  img.src = dataUrl;
+  img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+  cell.insertBefore(img, cell.firstChild);
   showToast('📸 Photo updated!');
 }
 
